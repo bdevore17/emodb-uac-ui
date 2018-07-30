@@ -1,36 +1,65 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { Grid, Navbar, Jumbotron, Button } from 'react-bootstrap';
+import React, { Component } from "react";
+import "./App.css";
+import { Navbar, Nav, NavItem } from "react-bootstrap";
+
+import Home from "./Home";
+import CreateApiKey from "./CreateApiKey";
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.options = [
+      {
+        name: "Create an Api Key",
+        route: "createApiKey",
+        target: CreateApiKey
+      },
+      {
+        name: "Request an Api Key",
+        route: "requestApiKey",
+        target: Home
+      }
+    ];
+  }
+
   render() {
     return (
       <div>
-        <Navbar inverse fixedTop>
-          <Grid>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href="/">Emodb UAC UI</a>
-              </Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-          </Grid>
-        </Navbar>
-        <Jumbotron>
-          <Grid>
-            <h1>Welcome to React</h1>
-            <p>
-              <Button
-                bsStyle="success"
-                bsSize="large"
-                href="http://react-bootstrap.github.io/components.html"
-                target="_blank">
-                View React Bootstrap Docs
-              </Button>
-            </p>
-          </Grid>
-        </Jumbotron>
+        <Router>
+          <div>
+            <Navbar inverse>
+              <Navbar.Header>
+                <LinkContainer to="/">
+                  <Navbar.Brand>Emodb User Access Control</Navbar.Brand>
+                </LinkContainer>
+                <Navbar.Toggle />
+              </Navbar.Header>
+              <Navbar.Collapse>
+                <Nav>
+                  {this.options.map((option, index) => {
+                    return (
+                      <LinkContainer to={"/" + option.route} key={index}>
+                        <NavItem eventKey={index}>{option.name}</NavItem>
+                      </LinkContainer>
+                    );
+                  })}
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+            <Route exact path="/" component={Home} />
+            {this.options.map((option, key) => (
+              <Route
+                exact
+                key={key}
+                path={"/" + option.route}
+                component={option.target}
+              />
+            ))}
+          </div>
+        </Router>
       </div>
     );
   }
