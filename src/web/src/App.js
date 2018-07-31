@@ -4,6 +4,7 @@ import { Navbar, Nav, NavItem } from "react-bootstrap";
 
 import Home from "./Home";
 import CreateApiKey from "./CreateApiKey";
+import CreateRole from "./CreateRole"
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
@@ -20,7 +21,7 @@ class App extends Component {
       {
         name: "Request an Api Key",
         route: "requestApiKey",
-        target: Home
+        target: CreateRole
       }
     ];
   }

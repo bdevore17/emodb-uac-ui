@@ -15,7 +15,6 @@ class CreateApiKey extends Component {
       owner: "",
       description: ""
     };
-    console.log(config.emoUrl);
   }
 
   submitApiKeyCredentials(e) {
@@ -63,14 +62,14 @@ class CreateApiKey extends Component {
           <fieldset disabled={this.state.apiKeyFormDisabled}>
             <FieldGroup
               id="formControlsAPIKey"
-              type="text"
-              label="API Key"
-              placeholder="Enter API Key"
+              type="password"
+              label="Parent API Key"
+              placeholder="Enter Parent API Key"
               onChange={key => this.setState({ apiKey: key.target.value })}
             />
             <FieldGroup
               id="formControlsOwner"
-              type="text"
+              type="email"
               label="Key Owner"
               placeholder="Enter Owner Email"
               onChange={owner => this.setState({ owner: owner.target.value })}
