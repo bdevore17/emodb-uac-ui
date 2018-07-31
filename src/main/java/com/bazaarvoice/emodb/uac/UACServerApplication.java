@@ -25,7 +25,7 @@ public class UACServerApplication extends Application<UACServerConfiguration> {
 
     public void run(UACServerConfiguration configuration, Environment environment) throws Exception {
         environment.servlets().addServlet("/ping", new PingServlet());
-        environment.jersey().setUrlPattern("/api");
-        environment.jersey().register(new UACResource());
+        environment.jersey().setUrlPattern("/api/*");
+        environment.jersey().register(new UACResource("http://localhost:8080", "local_default"));
     }
 }
